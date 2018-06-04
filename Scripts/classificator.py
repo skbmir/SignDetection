@@ -40,7 +40,13 @@ def make_prediction(img_path):
 	return classes[numpy.argmax(prediction)]
 
 
-img_path = '../Examples/' + sys.argv[1]
+try:
+	img_path = open('../Examples/' + sys.argv[1])
+except IOError as e:
+	img_path = sys.argv[1]
+else:
+	with img_path:
+		img_path = '../Examples/' + sys.argv[1]
 
 print('FOUND: ' + make_prediction(img_path))
 
